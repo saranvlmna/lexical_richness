@@ -1,0 +1,29 @@
+{
+  "name": "lexical_richnes",
+  "version": "1.0.0",
+  "main": "lex.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Saranjith P",
+  "license": "ISC",
+  "description": "calculate lexical_richnes",
+  "dependencies": {
+    "canvas": "^3.0.1",
+    "lodash": "^4.17.21",
+    "mathjs": "^14.0.1",
+    "natural": "^8.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saranvlmna/lexical_richness.git"
+  },
+  "keywords": [
+    "lexical",
+    "richness"
+  ],
+  "bugs": {
+    "url": "https://github.com/saranvlmna/lexical_richness/issues"
+  },
+  "homepage": "https://github.com/saranvlmna/lexical_richness#readme"
+}
