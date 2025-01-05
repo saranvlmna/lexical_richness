@@ -137,10 +137,11 @@ const text = fs.readFileSync("./text.txt").toString();
 const lex = new LexicalRichness(text);
 
 console.log("NUMBER OF WORDS:", lex.words);
+console.log("NUMBER OF UNIQUE WORDS:", lex.terms);
 console.log("TTR:", lex.ttr);
 console.log("RTTR:", lex.rttr);
 console.log("CTTR:", lex.cttr);
 console.log("Herdan's C:", lex.herdan);
 console.log("Maas's TTR:", lex.maas);
 console.log("MSTTR:", lex.msttr(5));
-console.log("MATTR:", lex.mattr(3));
+console.log("MATTR:", lex.mattr(20));
