@@ -144,11 +144,3 @@ console.log("Herdan's C:", lex.herdan);
 console.log("Maas's TTR:", lex.maas);
 console.log("MSTTR:", lex.msttr(5));
 console.log("MATTR:", lex.mattr(3));
-
-module.exports = {
-  LexicalRichness,
-  preprocess,
-  tokenize,
-  segmentGenerator,
-  slidingWindow,
-};
