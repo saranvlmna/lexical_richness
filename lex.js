@@ -1,7 +1,4 @@
-const math = require("mathjs");
 const _ = require("lodash");
-const natural = require("natural");
-const { createCanvas } = require("canvas");
 const fs = require("fs");
 
 // Preprocessing function
@@ -139,6 +136,7 @@ class LexicalRichness {
 const text = fs.readFileSync("./text.txt").toString();
 const lex = new LexicalRichness(text);
 
+console.log("NUMBER OF WORDS:", lex.words);
 console.log("TTR:", lex.ttr);
 console.log("RTTR:", lex.rttr);
 console.log("CTTR:", lex.cttr);
