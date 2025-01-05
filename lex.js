@@ -1,7 +1,8 @@
 const math = require("mathjs");
-const _ = require("lodash"); // For utility functions like range
-const natural = require("natural"); // For text tokenization
-const { createCanvas } = require("canvas"); // For plotting (alternative to matplotlib)
+const _ = require("lodash");
+const natural = require("natural");
+const { createCanvas } = require("canvas");
+const fs = require("fs");
 
 // Preprocessing function
 function preprocess(text) {
@@ -11,8 +12,8 @@ function preprocess(text) {
    * 2. Removes digits
    * 3. Removes variations of dashes and hyphens
    *
-   * @param {string} text - Input text
-   * @return {string} Preprocessed text
+   * @param {string} text -
+   * @return {string}
    */
   text = text.toLowerCase().replace(/[0-9]+/g, "");
   text = text.replace(/[–—-]/g, "");
@@ -30,7 +31,6 @@ function tokenize(text) {
   return text.split(/\s+/g).filter((word) => word.length > 0);
 }
 
-// Utility function: Generate segments
 function segmentGenerator(list, segmentSize) {
   /**
    * Split a list into segments of a given size.
@@ -45,7 +45,6 @@ function segmentGenerator(list, segmentSize) {
   return segments;
 }
 
-// Utility function: Sliding window
 function slidingWindow(sequence, windowSize = 2) {
   /**
    * Return a sliding window over a sequence.
@@ -60,7 +59,6 @@ function slidingWindow(sequence, windowSize = 2) {
   return windows;
 }
 
-// LexicalRichness class
 class LexicalRichness {
   /**
    * Object containing tokenized text and methods to compute Lexical Richness.
@@ -85,34 +83,28 @@ class LexicalRichness {
     this.terms = new Set(this.wordlist).size;
   }
 
-  // Type-Token Ratio (TTR)
   get ttr() {
     return this.terms / this.words;
   }
 
-  // Root TTR (RTTR)
   get rttr() {
     return this.terms / Math.sqrt(this.words);
   }
 
-  // Corrected TTR (CTTR)
   get cttr() {
     return this.terms / Math.sqrt(2 * this.words);
   }
 
-  // Herdan's C
   get herdan() {
     return Math.log(this.terms) / Math.log(this.words);
   }
 
-  // Maas's TTR
   get maas() {
     const logW = Math.log(this.words);
     const logT = Math.log(this.terms);
     return (logW - logT) / logW ** 2;
   }
 
-  // Mean Segmental TTR (MSTTR)
   msttr(segmentSize = 100, discard = true) {
     const segments = segmentGenerator(this.wordlist, segmentSize);
     if (discard && segments[segments.length - 1].length < segmentSize) {
@@ -127,7 +119,6 @@ class LexicalRichness {
     return _.mean(ttrs);
   }
 
-  // Moving Average TTR (MATTR)
   mattr(windowSize = 100) {
     if (windowSize > this.words) {
       throw new Error(
@@ -143,13 +134,9 @@ class LexicalRichness {
 
     return _.mean(ttrs);
   }
-
-  // Additional methods like MTLD and HDD can be implemented similarly
 }
 
-// put your text bellow
-const text = "The quick brown fox jumps over the lazy dog.";
-
+const text = fs.readFileSync("./text.txt").toString();
 const lex = new LexicalRichness(text);
 
 console.log("TTR:", lex.ttr);
